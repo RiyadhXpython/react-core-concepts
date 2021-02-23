@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -22,12 +22,13 @@ function App() {
       <header className="App-header">
       <p>hello react</p>  
       <Counter></Counter>
+      <Users></Users>
       <ul>
         {
           nayoks.map(nayok => <li>{nayok}</li>)
         }
         {
-          products.map(product => <product product={product} ></product>)
+          products.map(product => <product products ={product}></product>)
         }
       </ul>
       <Product product={products[0]} ></Product>
@@ -44,7 +45,7 @@ function Counter(){
   setCount(count + 1);
   };
   const handleDecease = () => {
-    setCount(count - 1);
+    setCount(count -1);
   }
   return(
     <div>
@@ -54,6 +55,27 @@ function Counter(){
     </div>
   )
 }
+function Users(){
+  const [users, setUsers] = useState([]);
+  useEffect(()=>{
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res => res.json())
+    .then(data => setUsers(data));
+  }, [])
+  return(
+    <div>
+      <h3>dynamic users:{users.length}</h3>
+      <ul>
+      {
+        users.map(user => <li>{user.phone}</li>)
+      }
+      </ul>
+    </div>
+  )
+}
+
+
+
 
 
 function Product(props){
