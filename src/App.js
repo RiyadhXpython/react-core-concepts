@@ -1,8 +1,10 @@
 // import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const nayoks = ["shanto", "shakib", "sajin", "riyadh"]
+  
+  const nayoks = ["shanto", "shakib", "sajin", "bappi"]
   const products = [
     {name:"photoshop" ,  price:"$100"},
     {name:"adobe xd" ,  price:"$99.99"},
@@ -10,20 +12,50 @@ function App() {
     {name:"premier pro" ,  price:"$69.96"},
   ]
 
+
+  
+
+
+
   return (
     <div className="App">
       <header className="App-header">
       <p>hello react</p>  
+      <Counter></Counter>
+      <ul>
+        {
+          nayoks.map(nayok => <li>{nayok}</li>)
+        }
+        {
+          products.map(product => <product product={product} ></product>)
+        }
+      </ul>
       <Product product={products[0]} ></Product>
       <Product product={products[1]} ></Product>
-      <Person name={nayoks[1]} heroin="moushumi"></Person>
-      <Person name={nayoks[2]} nayka="dani"></Person>
-      <Person name={nayoks[3]} nayka="Nai"></Person>
-      
+      <Person></Person>
       </header>
     </div>
   );
 }
+
+function Counter(){
+  const [count, setCount] = useState(0);
+  const handleIncrease = () => {
+  setCount(count + 1);
+  };
+  const handleDecease = () => {
+    setCount(count - 1);
+  }
+  return(
+    <div>
+      <h1>Count:{count}</h1>
+      <button onClick={handleDecease}>decease</button>
+      <button onClick={handleIncrease}>increase</button>
+    </div>
+  )
+}
+
+
 function Product(props){
   const productStyle={
     border:"1px solid yellow",
@@ -44,9 +76,6 @@ function Product(props){
   )
 
 }
-
-
-
 function Person(props){
   const PersonStyle={
     border:"2px solid red",
